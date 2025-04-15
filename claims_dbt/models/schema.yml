@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: claims_database
+    database: CLAIMS_DATABASE
+    schema: PUBLIC
+    tables:
+      - name: raw_claims
+        columns:
+          - name: claim_id
+            tests:
+              - not_null
+          - name: provider_number
+            tests:
+              - not_null
+
+models:
+  - name: raw_claims_check
+    description: "Checks for null claim IDs in a filtered view"
+    columns:
+      - name: claim_id
+        tests:
+          - not_null
