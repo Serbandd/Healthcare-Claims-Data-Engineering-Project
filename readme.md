@@ -1,6 +1,5 @@
-Here’s a clean and simple `README.md` for your GitHub repo:
 
----
+![chrome_AgOcikj3pi](https://github.com/user-attachments/assets/b830704f-af8c-4016-ac12-96ad94002916)
 
 # Raw Claims ETL Pipeline
 
