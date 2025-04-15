@@ -47,4 +47,3 @@ This repository contains an Apache Airflow DAG for processing healthcare claims 
 
 ---
 
-Let me know if you want to include usage examples or diagrams later.
