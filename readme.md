@@ -3,10 +3,12 @@
 ![Healthcare_claims_ETL](https://github.com/user-attachments/assets/aca015da-7bc2-4146-8853-f4f874466704)
 
 
-📊 About the Project
+📊 **About the Project**
+
 This project uses synthetic Medicare claims data from CMS to simulate real-world healthcare data challenges. While the data is not linked to real patients, it mirrors the structure and complexity of actual claims, making it an ideal playground for data engineers to build production-grade pipelines without privacy concerns.
 
-🏥 Why This Data Matters
+🏥 **Why This Data Matters**
+
 Insurance companies rely heavily on claims data to track costs, spot billing anomalies, and detect fraud. Each medical procedure is tied to specific claim codes, which evolve over time, making it difficult to track changes in cost, policy, and procedure mapping across providers.
 
 A single claims file may represent thousands of patients, procedures, and codes—data engineers must standardize, transform, and validate this at scale. For example:
@@ -15,7 +17,8 @@ A procedure billed at $1,000 by one provider may appear under a different claim 
 
 Each provider or customer may require a custom SQL transformation depending on their schema, leading to dynamic ingestion and mapping logic.
 
-🚧 Main Challenges Addressed
+🚧 **Main Challenges Addressed**
+
 Tracking Pricing Changes Across Claims: Claim codes and their corresponding billing prices change frequently. Mapping and managing this over time requires intelligent design—especially for historical tracking.
 
 Schema Differences Across Clients: Each insurance provider may structure and store their claims differently—some in AWS Redshift, others in Azure SQL, or Snowflake—forcing engineers to dynamically adapt SQL scripts and ingestion paths.
@@ -26,7 +29,7 @@ Ensuring Data Quality & Trust: Missing claim IDs, duplicate records, and out-of-
 
 Complex Data Governance: Supporting data scientists and actuaries requires that data be clean, timely, and versioned properly for audits and regulatory reporting.
 
-🧰 Tech Stack: Solutions Implemented
+🧰 **Tech Stack: Solutions Implemente**
 
 Layer	Tool	Role
 Orchestration	Apache Airflow	DAG-based scheduling & dependency tracking
