@@ -32,5 +32,11 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   claims_dbt:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+
+    silver:
+      +materialized: table # Silver is transformed and stored → table
+
+
+    gold:
+      +materialized: table # Gold → ready for dashboards, table is best
+

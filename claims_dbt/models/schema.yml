@@ -7,9 +7,6 @@ sources:
     tables:
       - name: raw_claims
         columns:
-          - name: claim_id
-            tests:
-              - not_null
           - name: provider_number
             tests:
               - not_null
@@ -21,3 +18,22 @@ models:
       - name: claim_id
         tests:
           - not_null
+
+  - name: raw_claims
+    description: "Raw claims as bronze layer"
+  
+  - name: silver_claims
+    description: "Cleaned claims - silver layer"
+    columns:
+      - name: claim_id
+        tests:
+          - not_null
+
+  - name: fact_duplicate_claims
+    description: "Gold Layer: Duplicate Claims"
+
+  - name: fact_procedure_cost
+    description: "Gold Layer: Procedure Costs"
+
+  - name: fact_underutilized_care
+    description: "Gold Layer: Preventive care underutilization"
