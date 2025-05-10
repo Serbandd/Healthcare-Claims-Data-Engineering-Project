@@ -106,5 +106,43 @@ This repository contains an Apache Airflow DAG for processing healthcare claims 
 - The expected date in the file name is used for validating that data falls within the correct monthly period.
 - SQL transformation logic is mapped via the `customer_sql_mapping` table in PostgreSQL.
 
+
+## 🧪 Practical Use Cases for Analysts
+
+This project goes beyond pipeline orchestration—it's designed to drive insights that improve healthcare delivery and cost efficiency. Using the cleaned and structured fact tables in the gold DBT layer, analysts and data scientists can power dashboards, audits, and ML-ready datasets.
+
+Key Analytical Use Cases
+- **🧍‍♂️ Duplicate Claim Detection**
+Goal: Spot instances of repeated claim submissions for the same procedure and beneficiary.
+Logic:
+
+Group by beneficiary_id, provider_number, claim_start_date
+
+Flag if COUNT(*) > 1
+
+Use Case: Helps identify billing anomalies or fraud patterns for auditing and recovery.
+
+ - **💰 Procedure Cost Benchmarking**
+Goal: Evaluate cost consistency across regions and providers.
+Logic:
+
+Group by provider_number, claim_type_code, claim_payment_amount
+
+Compare min, max, avg cost per procedure type
+
+Use Case: Insights for insurance cost negotiations and fair pricing enforcement.
+
+ - **🛡️ Underutilized Preventive Care**
+Goal: Identify patients who likely didn’t receive preventive services.
+Logic:
+
+Assume preventive procedures have claim_payment_amount < $100
+
+Identify beneficiary_ids missing such claims
+
+Use Case: Supports outreach initiatives, preventive care programs, and cost-saving strategies.
+
+ - **📈 Unified Metrics via DBT**
+All gold-level analytical queries are written as DBT models under models/gold. This allows version-controlled transformation logic and easy downstream integration with tools like Power BI, Tableau, or Jupyter notebooks.
 ---
 

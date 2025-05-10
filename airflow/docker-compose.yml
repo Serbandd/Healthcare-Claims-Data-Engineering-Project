@@ -74,6 +74,8 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
+      - ./claims_dbt:/opt/airflow/claims_dbt     
+      - ~/.dbt:/root/.dbt
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 10s
@@ -96,6 +98,8 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
+      - ./claims_dbt:/opt/airflow/claims_dbt     
+      - ~/.dbt:/root/.dbt
       
 volumes:
   postgres-data:

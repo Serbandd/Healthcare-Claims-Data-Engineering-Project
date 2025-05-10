@@ -4,6 +4,7 @@ from airflow.operators.python import PythonOperator
 from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
 from airflow.operators.dummy import DummyOperator
 from airflow.exceptions import AirflowException
+from airflow.operators.bash import BashOperator
 import calendar
 from datetime import datetime, date
 import os
@@ -158,15 +159,17 @@ with DAG(
         """,
     )
 
+   
+
     # Delete existing data from raw_claims in Snowflake
-    delete_raw_claims = SnowflakeOperator(
-        task_id="delete_from_raw_claims",
-        snowflake_conn_id="snowflake_default",
-        sql=f"""
-            DELETE FROM PUBLIC.raw_claims
-            WHERE source_file_name = '{file_name}';
-        """,
-    )
+    # delete_raw_claims = SnowflakeOperator(
+    #     task_id="delete_from_raw_claims",
+    #     snowflake_conn_id="snowflake_default",
+    #     sql=f"""
+    #         DELETE FROM PUBLIC.raw_claims
+    #         WHERE source_file_name = '{file_name}';
+    #     """,
+    # )
 
     # Task to read the SQL file
     read_sql_file = PythonOperator(
@@ -193,14 +196,29 @@ with DAG(
         params={"file_name": file_name},
     )
 
+        # After insert_into_raw_claims task:
+    run_dbt_models = BashOperator(
+        task_id="run_dbt_models",
+        bash_command="cd /opt/airflow/claims_dbt && dbt run --profiles-dir /root/.dbt",
+        dag=dag,
+    )
+
+    run_dbt_tests = BashOperator(
+        task_id="run_dbt_tests",
+        bash_command="cd /opt/airflow/claims_dbt && dbt test --profiles-dir /root/.dbt",
+        dag=dag,
+    )
+
+
     ready = DummyOperator(task_id="ready")
 
     (
         determine_script_task
         >> upload_to_snowflake_stage
-        >> delete_raw_claims
         >> read_sql_file
         >> insert_raw_claims
+        >> run_dbt_models 
+        >> run_dbt_tests
         >> dq_date_range
         >> ready
     )
