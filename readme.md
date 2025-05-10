@@ -1,7 +1,5 @@
 
-
 ![Healthcare_claims_ETL](https://github.com/user-attachments/assets/aca015da-7bc2-4146-8853-f4f874466704)
-
 
 📊 **About the Project**
 
@@ -54,12 +52,6 @@ Population-Level Trends
 Chronic disease patterns
 
 Pediatric treatment disparities
-
-
-
-
-
-![Healthcare_claims_ETL](https://github.com/user-attachments/assets/aca015da-7bc2-4146-8853-f4f874466704)
 
 
 # Raw Claims ETL Pipeline
@@ -141,6 +133,8 @@ Assume preventive procedures have claim_payment_amount < $100
 Identify beneficiary_ids missing such claims
 
 Use Case: Supports outreach initiatives, preventive care programs, and cost-saving strategies.
+
+![pbi_dashboard](https://github.com/user-attachments/assets/9c7d3d6f-0a52-43bb-a6c5-7cd852ee706f)
 
  - **📈 Unified Metrics via DBT**
 All gold-level analytical queries are written as DBT models under models/gold. This allows version-controlled transformation logic and easy downstream integration with tools like Power BI, Tableau, or Jupyter notebooks.
